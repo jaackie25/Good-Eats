@@ -1,11 +1,12 @@
-<h1>List of meals</h1>
+<h1>List of meals by ingredient</h1>
 <ul>
    <% meals.forEach((meal) => { %>
     <img src="<%= meal.strMealThumb %>" alt="">
     <li>
        <%= meal.strMeal %>
-    </li>   
-    <a href="/recipes/<%=meal.idMeal %>">View details</a>
+       <a href="/recipes/<%= meal.idMeal %>">View meal details here</a>
+    </li> 
     <% }) %>
 </ul>
+
 

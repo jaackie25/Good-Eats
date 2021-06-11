@@ -33,13 +33,10 @@ app.get('/new', (req, res) => {
 })
 
 app.post('/', (req,res) => {
-    const email = req.body.email
-    const password = req.body.password
-    // db fineOne
     db.user.findOne({
         where: {
-            email: email,
-            password: password
+            email: req.body.email,
+            password: req.body.password
         }
     }) .then(user => {
         res.redirect('/recipes')

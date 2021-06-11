@@ -13,25 +13,42 @@ router.get('/', (req, res) => {
 // post to grab form for recipe name search 
 router.get('/results', (req, res) => {
     let query = req.query.name
-    // console.log(query)
+   
     axios.get(`http://www.themealdb.com/api/json/v1/1/search.php?s=${query}`)
     .then(resName => {
         const meals = resName.data.meals
         JSON.stringify(meals)
-// filtering object array
-        let items = []
-        meals.forEach(meal => {
-        items = loop(meal) 
-      }) 
-        res.render('recipes/results.ejs', {meals:meals, items:items})
+
+        res.render('recipes/results.ejs', {meals})
     })
 })
 
 // post to grab form for ingredient search 
-router.get('/results', (req, res) => {
-    
+router.get('/ingredient', (req, res) => {
+    let ingredient = req.query.ingredient
+    axios.get(`http://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`)
+    .then(resName => {
+        const meals = resName.data.meals
+        JSON.stringify(meals)
+
+        res.render('recipes/ingredient.ejs', {meals})
+    })
 })
-// GET view details recipe -- add a favorites button option
+
+
+router.get('/:id', (req, res) => {
+    axios.get(`http://www.themealdb.com/api/json/v1/1/lookup.php?i=${req.params.id}`)
+    .then(resId => {
+       const meals = resId.data.meals
+      JSON.stringify(meals)
+
+      let items = []
+        meals.forEach(meal => {
+        items = loop(meal) 
+      }) 
+      res.render('recipes/details.ejs', {meals:meals, items:items})
+    })
+})
 
 
 
@@ -55,7 +72,7 @@ function loop(arr) {
         let ingreMeas= [ingre[i][1], meas[i][1]]
         finalRecipe.push(ingreMeas)
     }
-    // console.log(finalRecipe)
+
     return finalRecipe
 }
 
