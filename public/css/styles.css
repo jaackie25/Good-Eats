@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+body{
+    position: relative;
+}
+
+.home1 {
+    position: absolute;
+    border: 2px solid black;
+    height: 500px;
+    width: 450px;
+    left: 20%;
+    top: 200px;
+}
+
+.home2 {
+    position: absolute;
+    border: 2px solid black;
+    height: 500px;
+    width: 450px;
+    left: 55%;
+    top: 200px;
+}

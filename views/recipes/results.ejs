@@ -1,0 +1,20 @@
+<h1>List of meals</h1>
+<ul>
+   <% meals.forEach((meal) => { %>
+    <img src="<%= meal.strMealThumb %>" alt="">
+    <li>
+       <%= meal.strMeal %>
+    </li> 
+    <li>
+        <%= meal.strInstructions %>
+    </li>   
+    <% }) %>
+</ul>
+
+<ul>
+    <% items.forEach((item) => { %>
+       <li> <%= item %> </li> 
+    <% }) %>
+</ul>
+
+<a href="#">Add to your Favorites</a>
