@@ -7,6 +7,7 @@ const methodOverride = require('method-override')
 const rowdy = require('rowdy-logger')
 const bcrypt = require('bcrypt')
 
+
 // config app
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(ejsLayouts);
 app.use(methodOverride('_method'))
 rowdy.begin(app)
+
 
 // attaching controllers
 app.use('/recipes', require('./controllers/recipes'))
@@ -41,14 +43,16 @@ const passwordHash = bcrypt.hashSync(req.body.password,10)
             password: passwordHash
         }
     }) .then(user => {
-        res.redirect('/recipes')
+        if(user) {
+            res.redirect('/recipes')
+        } else {
+            res.render('home', {errorMessage: 'This Email does not exist. Create an account to login'})
+        }
     }) .catch(error => {
         console.log(error)
     })
-
-    // redirect to /recipes
 })
-
+    
 
 app.post('/register', (req, res) => {
     const passwordHash = bcrypt.hashSync(req.body.password,10)
@@ -61,7 +65,7 @@ app.post('/register', (req, res) => {
         console.log(user.get())
         res.redirect('/')
     }) .catch(error => {
-        res.redirect("/register")
+        res.render('register', {errorMessage: 'This email already exists. Try again with a different email'})
     })
     // redirect to /login page
     

@@ -14,3 +14,10 @@
     </div>
     <input type="submit" class="loginBtn" value="Register">
 </form>
+
+
+
+<% if (typeof errorMessage !== "undefined") { %>
+    <p>Unable to login in:</p>
+    <p><%= errorMessage %></p>
+<% } %>
