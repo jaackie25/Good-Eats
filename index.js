@@ -5,6 +5,7 @@ const ejsLayouts = require('express-ejs-layouts');
 let db = require('./models')
 const methodOverride = require('method-override')
 const rowdy = require('rowdy-logger')
+const bcrypt = require('bcrypt')
 
 // config app
 const app = express();
@@ -28,15 +29,16 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
-app.get('/new', (req, res) => {
-    res.render('new')
+app.get('/register', (req, res) => {
+    res.render('register')
 })
 
 app.post('/', (req,res) => {
+const passwordHash = bcrypt.hashSync(req.body.password,10)
     db.user.findOne({
         where: {
             email: req.body.email,
-            password: req.body.password
+            password: passwordHash
         }
     }) .then(user => {
         res.redirect('/recipes')
@@ -48,22 +50,20 @@ app.post('/', (req,res) => {
 })
 
 
-app.post('/recipes', (req, res) => {
-    const fName= req.body.fName
-    const lName= req.body.lName
-    const email = req.body.email
-    const password = req.body.password
-    // db.create.user
+app.post('/register', (req, res) => {
+    const passwordHash = bcrypt.hashSync(req.body.password,10)
     db.user.create({
-        fName: fName,
-        lName: lName,
-        email: email,
-        password: password
+        fName: req.body.fName,
+        lName: req.body.lName,
+        email: req.body.email,
+        password: passwordHash
     }) .then(user => {
-        console.log(comment.get())
-        res.redirect('/recipes')
+        console.log(user.get())
+        res.redirect('/')
+    }) .catch(error => {
+        res.redirect("/register")
     })
-    // redirect to /recipes
+    // redirect to /login page
     
 })
 
