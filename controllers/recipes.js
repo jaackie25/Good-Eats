@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
 router.get('/results', (req, res) => {
     let query = req.query.name
     // console.log(query)
-
     axios.get(`http://www.themealdb.com/api/json/v1/1/search.php?s=${query}`)
     .then(resName => {
         const meals = resName.data.meals
@@ -29,7 +28,9 @@ router.get('/results', (req, res) => {
 })
 
 // post to grab form for ingredient search 
-
+router.get('/results', (req, res) => {
+    
+})
 // GET view details recipe -- add a favorites button option
 
 
@@ -43,9 +44,9 @@ function loop(arr) {
     let arrValues = Object.entries(arr)
 
     arrValues.forEach((val) => {
-        if(val[0].includes('Ingre') && val[0].length !== 0 && val[0] !==null) {
+        if(val[0].includes('Ingre') &&  val[1] !== "" && val[1]!= null) {
             ingre.push(val)
-        } else if(val[0].includes('Meas') && val[0].length !== 0 && val[0] !==null) {
+        } else if(val[0].includes('Meas') && val[1] !== "" && val[1]!= null) {
             meas.push(val)
         }
     })
