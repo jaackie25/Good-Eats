@@ -1,0 +1,12 @@
+<h1>Here are your saved favorites</h1>
+
+<ul>
+    <% meals.forEach((meal) => { %>
+     <img src="<%= meal.strMealThumb %>" alt="">
+     <li>
+        <%= meal.strMeal %>
+     </li>   
+     <a href="/recipes/<%=meal.idMeal %>">View details</a>
+     <% }) %>
+ </ul>
+ 

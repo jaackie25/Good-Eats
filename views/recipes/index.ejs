@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Rei's DSL's</a>
+    <a class="navbar-brand" href="#">Good Eats</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,7 +12,10 @@
           <a class="nav-link" href="#">Features</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <form method="GET" action="/user/favorite">
+            <a class="nav-link" href="/user/favorites"><%= email %></a>
+          </form>
+          
         </li>
       </ul>
     </div>
@@ -21,21 +24,30 @@
   <h1>Welcome to good eats, home of the good eats!</h1>
 
   <div class='home1'>
-    <form method="GET" action="/recipes/results">
-        <label>Enter the name of the recipe</label>
-        <br>
-        <input type="text" name="name">
-        <br>
-        <input type="submit" value="Submit">
+    <form class="search" method="GET" action="/recipes/results">
+      <div class="divTxt1">
+        <input class="inputSearch" type="text" name="name" placeholder="Search by name">
+      </div>
+        <button type="submit">Search</button>
       </form>
   </div>
 
   <div class="home2">
-    <form method="GET" action="/recipes/ingredient">
-      <label>Find a recipe by ingredient</label>
-      <br>
-      <input type="text" name="ingredient">
-      <br>
-      <input type="submit" value="Submit">
+    <form class="search" method="GET" action="/recipes/ingredient">
+      <div class="divTxt2">
+        <input class="inputSearch" type="text" name="ingredient" placeholder="Search by ingredient">
+      </div>      
+      <button type="submit">Search</button>
     </form>
   </div>
+
+
+  <script>
+    if(!localStorage.getItem('user')) {
+      let user = "<%- email %>"
+      localStorage.setItem('user', user)
+    }
+
+    let currentUser = localStorage.getItem('user')
+    console.log(`User logged in: ${currentUser}`)
+  </script>

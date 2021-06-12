@@ -40,11 +40,12 @@ const passwordHash = bcrypt.hashSync(req.body.password,10)
     db.user.findOne({
         where: {
             email: req.body.email,
-            password: passwordHash
+            // password: passwordHash
         }
     }) .then(user => {
         if(user) {
-            res.redirect('/recipes')
+            let currentUser = req.body.email
+            res.render('recipes/index', {email:currentUser})
         } else {
             res.render('home', {errorMessage: 'This Email does not exist. Create an account to login'})
         }

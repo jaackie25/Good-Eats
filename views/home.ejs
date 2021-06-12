@@ -1,19 +1,24 @@
 <h1>Welcome to Good Eats, home of the Good Eats</h1>
-<h2>Login to view recipes </h2>
 
-<form action="/" method="POST">
+
+<form class="login-form" action="/" method="POST">
     <h1>Login</h1>
-    <div class="login-text">
+    <div class="txtb">
         <input type="text" placeholder="Email" name="email" required>
     </div>
-    <div class="login-text">
-        <input type="password" placeholder="password" name="password" required>
+    <div class="txtb">
+        <input type="password" placeholder="Password" name="password" required>
     </div>
-    <input type="submit" class="loginBtn" value="Login">
+   
+        <input type="submit" class="logBtn" value="Login">
+    <div class="bottom-text">
     <a href="/register">Create an account</a>
+    </div>
+    
 </form>
 
 <% if (typeof errorMessage !== "undefined") { %>
     <p>Unable to login in:</p>
     <p><%= errorMessage %></p>
 <% } %>
+

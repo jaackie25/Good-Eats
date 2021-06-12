@@ -1,4 +1,4 @@
-const { default: axios } = require('axios')
+const axios = require('axios')
 let express = require('express')
 let db = require('../models')
 let router = express.Router()
@@ -46,7 +46,7 @@ router.get('/:id', (req, res) => {
         meals.forEach(meal => {
         items = loop(meal) 
       }) 
-      res.render('recipes/details.ejs', {meals:meals, items:items})
+      res.render('recipes/details.ejs', {meals:meals, items:items, recipeId: req.params.id})
     })
 })
 

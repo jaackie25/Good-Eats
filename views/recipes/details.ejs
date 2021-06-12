@@ -17,4 +17,7 @@
     <% }) %>
 </ul>
 
-<a href="#">Add to your Favorites</a>
+
+<form method="POST" action="/users/favorites/<%= recipeId %>">
+   <input type="submit" value="Add to Favorite" name="Favorite" >
+</form>
