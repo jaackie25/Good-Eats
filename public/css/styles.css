@@ -7,7 +7,13 @@
 .loginHome{
     width: 100vw;
     height: 100vh;
-    background: cornflowerblue;
+    background-image: url(https://i.imgur.com/09gnggP.jpg);
+    background-repeat: no-repeat;
+    background-position: center;   
+}
+
+.loginHome h1 {
+    color:white;
 }
 
 .login-form{
@@ -19,8 +25,12 @@
     position:absolute;
     left: 40%;
     top: 150px;  
-    box-shadow: 10px 5px 5px lightgray;
+    box-shadow: 10px 14px 28px rgba(71, 69, 69, 0.25), 10px 20px 10px rgba(71, 69, 69, 0.25);
 }
+
+.login-form:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
 
 .login-form h1{
     text-align: center;
@@ -81,69 +91,62 @@
     font-size: 15px;
 }
 
-body{
-    position: relative;
-    background-color: lavenderblush;
-}
 
 .home1 {
-    position: absolute;
-    border: 2px solid black;
-    height: 500px;
-    width: 450px;
-    left: 20%;
-    top: 200px;
-    /* content:url(https://i.imgur.com/pbTrUei.jpg); */
-    
+   background-image: url(https://i.imgur.com/LI2sLXh.jpg);
+   height: 600px;
+   width: 450px;
+   background-position: center; 
+   position: absolute;
+   left: 25%;
+   top: 20%;
+   background-size: cover;
 }
 
 .home2 {
+    background-image: url(https://i.imgur.com/dgnhBBP.jpg);
+    height: 600px;
+    width: 470px;
+    background-position: center; 
     position: absolute;
-    border: 2px solid black;
-    height: 500px;
-    width: 450px;
+    background-size: cover;
     left: 55%;
-    top: 200px;
+    top: 20%;
 }
 
 .search {
     position: absolute;
-    top: 35%;
+    top: 39%;
     left: 25%;
-    z-index: 2 !important;
-
 }
 
 button {
     margin-top: 20px;
     border: 2px solid white;
     color:white;
+    background-color: black;
     padding: 7px 20px;
     border-radius: 10px;
-   
-    
 }
 
 .inputSearch {
     outline: 0;
     border-width: 0 0 2px;
-    border-color: lightgray;
+    color:white;
     background: none;
     padding: 0 28px;
 }
 
+
 .inputSearch::placeholder {
     position:absolute;
     left: 50px;
+    color:white;
 }
 
-
-.card {
-    display: flex;
-    /* flex-flow: wrap; */
-    align-items: center;
-    
-}
+.card-space {
+    margin-bottom: 25px; 
+  }
 
 .detailImg {
     display: inline-block;

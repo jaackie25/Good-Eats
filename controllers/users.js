@@ -5,6 +5,19 @@ const axios = require('axios')
 
 
 // GET -- Favorites button on nav to view favorites
+router.get('/favorites/:email', (req, res) => {
+    console.log(req.params, "🚜🚙🚙🚚")
+    db.user.findOne({
+        where: {email: req.params.email},
+        include:[db.recipe]
+    }) .then(user => {
+        res.render('users/favorites.ejs', {user})
+    }) .catch (error => {
+        console.log(error)
+    })
+    
+})
+
 router.post('/favorites/:id', (req, res) => {
    console.log(req.body)
     console.log(req.params)
@@ -16,17 +29,14 @@ router.post('/favorites/:id', (req, res) => {
             where: {
                 email: req.body.useremail
             }
-        }). then (user => {
+        }).then (user => {
             db.recipe.create({
                 name: req.body.recipe,
                 userId: user.dataValues.id
             })
-            console.log(user.dataValues.id)
-        })
-        // db.recipe.create({
-        //     name: 
-        // })
+        }) 
         res.render('users/index.ejs', {meals})
+       
     })
    
 })

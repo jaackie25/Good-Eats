@@ -1,14 +1,19 @@
 <h1>List of meals by ingredient</h1>
 
-   
-   
-      <% meals.forEach((meal) => { %>
-       <div class="card" style="width: 18rem;">
-         <img src="<%= meal.strMealThumb %>" class="card-img-top" alt="Picture of food">
-         <div class="card-body">
-           <h5 class="card-title"><%= meal.strMeal %></h5>
-           <a href="/recipes/<%= meal.idMeal %>" class="btn btn-primary">View Recipe</a>
-         </div>
-       </div>
-       <% }) %>
-     
+
+
+    <div class="container">
+      <div class="row">
+        <% meals.forEach((meal) => { %>
+                  <div class="col-sm-4 card-space">
+                    <div class="card " style="width: 18rem;">
+                      <img src="<%= meal.strMealThumb %>" class="card-img-top" alt="Picture of food">
+                      <div class="card-body">
+                        <h5 class="card-title"><%= meal.strMeal %></h5>
+                        <a href="/recipes/<%= meal.idMeal %>" class="btn btn-primary">View Recipe</a>
+                      </div>
+                    </div>
+                  </div>
+        <% }) %>
+      </div>
+    </div>

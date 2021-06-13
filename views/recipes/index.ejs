@@ -12,8 +12,10 @@
           <a class="nav-link" href="#">Features</a>
         </li>
         <li class="nav-item">
-          <form method="GET" action="/user/favorite">
-            <a class="nav-link" href="/user/favorites"><%= email %></a>
+          <form method="GET" action="/users/favorites/<%= email %>">
+            <input hidden type="text" name="email" id="email" value="test">
+            <button type="submit">View your favorites</button>
+            <!-- <a class="nav-link" href="/users/favorites"><%= email %></a> -->
           </form>
           
         </li>
@@ -33,7 +35,6 @@
   </div>
 
   <div class="home2">
-    <img src="<&=https://i.imgur.com/pbTrUei.jpg%>" alt="">
     <form class="search" method="GET" action="/recipes/ingredient">
       <div class="divTxt2">
         <input class="inputSearch" type="text" name="ingredient" placeholder="Search by ingredient">
@@ -43,12 +44,25 @@
   </div>
 
 
+
+  
+
+
+<% if (!locals.username) { %>
   <script>
-    if(!localStorage.getItem('user')) {
+      let currentUser = localStorage.getItem('user')
+      document.getElementById('email').value = currentUser
+      console.log(`User logged in: ${currentUser}`)
+  </script>
+<% } else { %>
+
+  <script>
+      if(!localStorage.getItem('user')) {
       let user = "<%- email %>"
-      localStorage.setItem('user', user)
+      localStorage.setItem('user', user) 
     }
 
     let currentUser = localStorage.getItem('user')
     console.log(`User logged in: ${currentUser}`)
   </script>
+<% } %>

@@ -1,12 +1,17 @@
-<h1>Here are your saved favorites</h1>
-
-<ul>
-    <% meals.forEach((meal) => { %>
-     <img src="<%= meal.strMealThumb %>" alt="">
-     <li>
-        <%= meal.strMeal %>
-     </li>   
-     <a href="/recipes/<%=meal.idMeal %>">View details</a>
-     <% }) %>
- </ul>
- 
+<h1>You added a favorite</h1>
+  
+ <div class="container">
+    <div class="row justify-content-center">
+      <% meals.forEach((meal) => { %>
+                <div class="col-4 card-space">
+                  <div class="card " style="width: 18rem;">
+                    <img src="<%= meal.strMealThumb %>" class="card-img-top" alt="Picture of food">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= meal.strMeal %></h5>
+                      <a href="/recipes/<%= meal.idMeal %>" class="btn btn-primary">View Recipe</a>
+                    </div>
+                  </div>
+                </div>
+      <% }) %>
+    </div>
+  </div>
