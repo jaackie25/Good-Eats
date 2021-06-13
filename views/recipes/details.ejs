@@ -1,23 +1,47 @@
-<h1>Meal Full Recipe</h1>
-<ul>
+
    <% meals.forEach((meal) => { %>
-    <img src="<%= meal.strMealThumb %>" alt="">
-    <li>
-       <%= meal.strMeal %>
-    </li>   
-    <li>
-        <%= meal.strInstructions %>
-    </li> 
+      <h2> <%= meal.strMeal %> </h2>
+      <div class="instructions">
+         <img class="detailImg" src="<%= meal.strMealThumb %>" alt="">
+         <ol>
+            <% items.forEach((item) => { %>
+               <li class="item"> <%= item %> </li> 
+            <% }) %>
+         </ol>
+        
+      </div>
+    <div>
+      <h2 class="instrucTitle">Instructions</h2>
+      <%= meal.strInstructions %>
+    </div>
     <% }) %>
-</ul>
 
- <ul>
-    <% items.forEach((item) => { %>
-       <li> <%= item %> </li> 
-    <% }) %>
-</ul>
-
-
+    
 <form method="POST" action="/users/favorites/<%= recipeId %>">
+   <input type="hidden" id="userInput" name="useremail" value="test">
+   <% meals.forEach(meal => { %>
+       <input type="hidden" id="recipeName" name="recipe" value="<%=meal.strMeal%>"> 
+   <% }) %>
+  
    <input type="submit" value="Add to Favorite" name="Favorite" >
 </form>
+
+
+<% if (!locals.username) { %>
+   <script>
+       let currentUser = localStorage.getItem('user')
+       document.getElementById('userInput').value = currentUser
+       console.log(`User logged in: ${currentUser}`)
+   </script>
+<% } else { %>
+
+   <script>
+       if (!localStorage.getItem('user')) {
+           let user = "<%- username %>"
+           localStorage.setItem('user', user)
+       }
+       
+       let currentUser = localStorage.getItem('user')
+       console.log(`User logged in: ${currentUser}`)
+   </script>
+<% } %>

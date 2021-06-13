@@ -1,21 +1,25 @@
-<h1>Welcome to Good Eats, home of the Good Eats</h1>
 
 
-<form class="login-form" action="/" method="POST">
-    <h1>Login</h1>
-    <div class="txtb">
-        <input type="text" placeholder="Email" name="email" required>
-    </div>
-    <div class="txtb">
-        <input type="password" placeholder="Password" name="password" required>
-    </div>
-   
-        <input type="submit" class="logBtn" value="Login">
-    <div class="bottom-text">
-    <a href="/register">Create an account</a>
-    </div>
-    
-</form>
+<div class="loginHome">
+    <h1>Welcome to Good Eats, home of the Good Eats</h1>
+
+    <form class="login-form" action="/" method="POST">
+        <h1>Login</h1>
+        <div class="txtb">
+            <input type="text" placeholder="Email" name="email" required>
+        </div>
+        <div class="txtb">
+            <input type="password" placeholder="Password" name="password" required>
+        </div>
+       
+            <input type="submit" class="logBtn" value="Login">
+        <div class="bottom-text">
+        <a href="/register">Create an account</a>
+        </div> 
+    </form>
+
+</div>
+
 
 <% if (typeof errorMessage !== "undefined") { %>
     <p>Unable to login in:</p>
