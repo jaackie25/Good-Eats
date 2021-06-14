@@ -17,14 +17,15 @@
     <% }) %>
 
     
-<form method="POST" action="/users/favorites/<%= recipeId %>">
-   <input type="hidden" id="userInput" name="useremail" value="test">
-   <% meals.forEach(meal => { %>
-       <input type="hidden" id="recipeName" name="recipe" value="<%=meal.strMeal%>"> 
-   <% }) %>
-  
-   <input type="submit" value="Add to Favorite" name="Favorite" >
-</form>
+    <form method="POST" action="/users/favorites/<%= recipeId %>">
+      <input type="hidden" id="userInput" name="useremail" value="test">
+      <% meals.forEach(meal => { %>
+          <input type="hidden" id="recipeName" name="recipe" value="<%=meal.strMeal%>"> 
+          <input type="hidden" name="mealId" value="<%=meal.idMeal %>">
+      <% }) %>
+     
+      <input type="submit" value="Add to Favorite" name="Favorite" >
+   </form>
 
 
 <% if (!locals.username) { %>

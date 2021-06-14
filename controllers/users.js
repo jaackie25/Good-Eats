@@ -4,19 +4,37 @@ let router = express.Router()
 const axios = require('axios')
 
 
-// GET -- Favorites button on nav to view favorites
-router.get('/favorites/:email', (req, res) => {
-    console.log(req.params, "🚜🚙🚙🚚")
-    db.user.findOne({
+async function getImageSrcs (recipeIds) {
+    const images = []
+    for (let i = 0; i < recipeIds.length; i++) {
+        const image = await axios.get(`http://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeIds[i]}`)
+        const src = image.data.meals[0].strMealThumb
+        images.push(src)
+    }
+    return images 
+}  
+router.get('/favorites/:email', async (req, res) => {
+    const user = await db.user.findOne({
         where: {email: req.params.email},
         include:[db.recipe]
-    }) .then(user => {
-        res.render('users/favorites.ejs', {user})
-    }) .catch (error => {
-        console.log(error)
+    }) 
+    const recipes = user.dataValues.recipes
+    const recipeIds= []
+    recipes.forEach(recipe => {
+       recipeIds.push(recipe.dataValues.recipeId) 
     })
-    
+    const imageSrc = await getImageSrcs(recipeIds)
+    const results = []
+    for(let i =0; i<recipes.length; i++) {
+        const result = {
+            recipe: recipes[i],
+            image: imageSrc[i]
+        }
+        results.push(result)
+    }
+        res.render('users/favorites', {results})
 })
+
 
 router.post('/favorites/:id', (req, res) => {
    console.log(req.body)
@@ -30,29 +48,35 @@ router.post('/favorites/:id', (req, res) => {
                 email: req.body.useremail
             }
         }).then (user => {
+            console.log(user, "🚲🚛🛹🛵🚈🚈")
             db.recipe.create({
                 name: req.body.recipe,
-                userId: user.dataValues.id
+                userId: user.dataValues.id,
+                recipeId: req.body.mealId,
             })
         }) 
         res.render('users/index.ejs', {meals})
-       
     })
-   
 })
 
-// post to grab hidden form to add favorites (button on recipes id page) -- redirect to favorites page
+
 
 // DELETE to remove recipe from favorties
 
 
 
-
-
-
-
-
-
+// router.get('/favorites/:email', (req, res) => {
+//     axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s`)
+//     .then(response => {
+//         const meals = response.data.meals
+//         JSON.stringify(meals)
+//         db.user.findOne({
+//             where: {email: req.params.email},
+//             include: [db.recipe]
+//         })
+//         res.render('users/favorites.ejs', {user}) 
+//     })   
+//   })
 
 
 

@@ -12,16 +12,16 @@ router.get('/', (req, res) => {
 
 // post to grab form for recipe name search 
 router.get('/results', (req, res) => {
-    let query = req.query.name
-   
-    axios.get(`http://www.themealdb.com/api/json/v1/1/search.php?s=${query}`)
+    // let query = req.query.name
+    axios.get(`http://www.themealdb.com/api/json/v1/1/search.php?s=`)
     .then(resName => {
         const meals = resName.data.meals
         JSON.stringify(meals)
-
         res.render('recipes/results.ejs', {meals})
     })
 })
+
+
 
 // post to grab form for ingredient search 
 router.get('/ingredient', (req, res) => {
@@ -30,7 +30,6 @@ router.get('/ingredient', (req, res) => {
     .then(resName => {
         const meals = resName.data.meals
         JSON.stringify(meals)
-
         res.render('recipes/ingredient.ejs', {meals})
     })
 })

@@ -1,7 +1,39 @@
 <h1>Here is a list of all your favorites</h1>
 
-<% user.recipes.forEach(recipe => { %>
- <p> <%= recipe.name %> </p> 
-<% }) %>
 
 
+<% results.forEach(result => { %>
+  <p> <%=result.recipe.name%> </p>
+  <img src="<%=result.image %>" alt="">
+  <a href="/recipes/<%=result.recipe.recipeId %>">Click here to view details</a>
+  <% }) %>
+
+    
+
+
+
+
+
+
+
+
+
+
+<% if (!locals.username) { %>
+  <script>
+      let currentUser = localStorage.getItem('user')
+      document.getElementById('email').value = currentUser
+      console.log(`User logged in: ${currentUser}`)
+  </script>
+<% } else { %>
+
+  <script>
+      if(!localStorage.getItem('user')) {
+      let user = "<%- email %>"
+      localStorage.setItem('user', user) 
+    }
+
+    let currentUser = localStorage.getItem('user')
+    console.log(`User logged in: ${currentUser}`)
+  </script>
+<% } %>

@@ -2,6 +2,7 @@ const db = require('./models')
 
 // db.recipe.create({
 //     name: 'Mac & Cheese',
+//     recipeId: 53052,
 //     userId: 1
 // })
 //     .then(recipe => {
