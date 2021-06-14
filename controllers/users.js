@@ -37,8 +37,8 @@ router.get('/favorites/:email', async (req, res) => {
 
 
 router.post('/favorites/:id', (req, res) => {
-   console.log(req.body)
-    console.log(req.params)
+//    console.log(req.body)
+//     console.log(req.params)
     axios.get(`http://www.themealdb.com/api/json/v1/1/lookup.php?i=${req.params.id}`)
     .then(resFav => {
         const meals = resFav.data.meals
@@ -49,6 +49,7 @@ router.post('/favorites/:id', (req, res) => {
             }
         }).then (user => {
             console.log(user, "🚲🚛🛹🛵🚈🚈")
+            console.log(recipe, "RECIPE LIST")
             db.recipe.create({
                 name: req.body.recipe,
                 userId: user.dataValues.id,
@@ -63,6 +64,13 @@ router.post('/favorites/:id', (req, res) => {
 
 // DELETE to remove recipe from favorties
 
+router.delete('/favorites/:id', (req, res) => {
+    const id = req.params.id
+
+
+
+    res.send("got to the delete portion")
+})
 
 
 // router.get('/favorites/:email', (req, res) => {

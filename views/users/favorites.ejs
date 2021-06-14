@@ -6,6 +6,10 @@
   <p> <%=result.recipe.name%> </p>
   <img src="<%=result.image %>" alt="">
   <a href="/recipes/<%=result.recipe.recipeId %>">Click here to view details</a>
+ 
+  <form method="POST" action="/users/favorites/<%=result.recipe.recipeId %>/?_method=DELETE">
+    <input type="submit" value="delete">
+  </form>
   <% }) %>
 
     
