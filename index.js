@@ -45,7 +45,6 @@ app.post('/', async (req, res) => {
     const validLogin = await bcrypt.compare(password, user.password)  
     if(validLogin){
         let currentUser = req.body.email
-        console.log(req.body)
         res.render('recipes/index', {email:currentUser})
     } else {
         res.render('home', {errorMessage: 'This Email does not exist. Create an account to login'})
@@ -102,6 +101,10 @@ app.post('/register', async (req, res) =>{
 //         res.render('register', {errorMessage: 'This email already exists. Try again with a different email'})
 //     }) 
 // })
+
+app.get('/logout', (req, res) => {
+    res.render('home', {logout: true})
+})
 
 app.listen(PORT, () => {
     console.log(`you are listening on port ${PORT} 👨‍🍳`)

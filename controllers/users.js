@@ -22,7 +22,7 @@ router.get('/favorites/:email', (req, res) => {
     })
 })
 
-router.post('/favorites/email/:email', (req, res) => {
+router.get('/favorites/email/:email', (req, res) => {
     db.user.findOne({
         where: {email: req.params.email},
         include:[db.recipe]
@@ -32,6 +32,18 @@ router.post('/favorites/email/:email', (req, res) => {
         console.log(error)
     })
 })
+
+
+// router.post('/favorites/email/:email', (req, res) => {
+//     db.user.findOne({
+//         where: {email: req.params.email},
+//         include:[db.recipe]
+//     }) .then(foundUser => {
+//         res.render('users/favorites.ejs', {foundUser})
+//     }) .catch (error => {
+//         console.log(error)
+//     })
+// })
 
 
 
@@ -79,7 +91,7 @@ router.delete('/favorites/:id', (req, res) => {
             where:{recipeId: req.params.id}
         }).then(response => {
             // res.send("got to the delete portion")
-            res.redirect(`/favorites/email/${email}`)
+            res.redirect(`/users/favorites/email/${email}`)
         })
     })
     // res.send("got to the delete portion")

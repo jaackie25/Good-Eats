@@ -11,8 +11,20 @@
     <title>Document</title>
 </head>
 <body>
-   
+    <nav id="logout"></nav>
     <%- body %>
     
+    <% if (locals.logout) { %>
+        <script>
+            localStorage.clear()
+        </script>
+    <% } %>
+    <script>
+        let user = localStorage.getItem('user')
+        console.log(user)
+        if (user) {
+            document.getElementById('logout').innerHTML = "<a href='/logout'></a>"
+        }
+    </script>
 </body>
 </html>
