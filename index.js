@@ -35,46 +35,72 @@ app.get('/register', (req, res) => {
     res.render('register')
 })
 
-app.post('/', (req,res) => {
-const salt= bcrypt.genSaltSync(10)    
-const passwordHash = bcrypt.hashSync(req.body.password, salt)
-console.log(passwordHash)
-    db.user.findOne({
-        where: {
-            email: req.body.email,
-            // password: passwordHash
-        }
-    }) .then(user => {
-        // console.log(user)
-        if(user) {
-            let currentUser = req.body.email
-            res.render('recipes/index', {email:currentUser})
-        } else {
-            res.render('home', {errorMessage: 'This Email does not exist. Create an account to login'})
-        }
-    }) .catch(error => {
-        console.log(error)
-    })
+
+app.post('/', async (req, res) => {
+    const email= req.body.email
+    const password= req.body.password
+    const user = await  db.user.findOne({
+        where: {email: email}
+         })
+    const validLogin = await bcrypt.compare(password, user.password)  
+    if(validLogin){
+        let currentUser = req.body.email
+        res.render('recipes/index', {email:currentUser})
+    } else {
+        res.render('home', {errorMessage: 'This Email does not exist. Create an account to login'})
+    }
+})
+
+// app.post('/', (req,res) => {
+// const salt= bcrypt.genSaltSync(10)    
+// const passwordHash = bcrypt.hashSync(req.body.password, salt)
+// console.log(passwordHash)
+//     db.user.findOne({
+//         where: {
+//             email: req.body.email,
+//             password: passwordHash
+//         }
+//     }) .then(user => {
+//         if(user) {
+//             let currentUser = req.body.email
+//             res.render('recipes/index', {email:currentUser})
+//         } else {
+//             res.render('home', {errorMessage: 'This Email does not exist. Create an account to login'})
+//         }
+//     }) .catch(error => {
+//         console.log(error)
+//     })
+// })
+
+app.post('/register', async (req, res) =>{
+    const password = req.body.password
+    const email= req.body.email
+    const hash= await bcrypt.hash(password, 10)
+    const user =  db.user.create({
+                fName: req.body.fName,
+                lName: req.body.lName,
+                email: email,
+                password: hash
+            }) 
+      res.redirect('/')   
 })
     
 
-app.post('/register', (req, res) => {
-    const salt= bcrypt.genSaltSync(10)    
-    const passwordHash = bcrypt.hashSync(req.body.password, salt)
-    db.user.create({
-        fName: req.body.fName,
-        lName: req.body.lName,
-        email: req.body.email,
-        password: passwordHash
-    }) .then(user => {
-        console.log(user.get())
-        res.redirect('/')
-    }) .catch(error => {
-        res.render('register', {errorMessage: 'This email already exists. Try again with a different email'})
-    })
-    // redirect to /login page
-    
-})
+// app.post('/register', (req, res) => {
+//     const salt= bcrypt.genSaltSync(10)    
+//     const passwordHash = bcrypt.hashSync(req.body.password, salt)
+//     db.user.create({
+//         fName: req.body.fName,
+//         lName: req.body.lName,
+//         email: req.body.email,
+//         password: passwordHash
+//     }) .then(user => {
+//         console.log(user.get())
+//         res.redirect('/')
+//     }) .catch(error => {
+//         res.render('register', {errorMessage: 'This email already exists. Try again with a different email'})
+//     }) 
+// })
 
 app.listen(PORT, () => {
     console.log(`you are listening on port ${PORT} 👨‍🍳`)
