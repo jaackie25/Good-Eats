@@ -1,4 +1,7 @@
 
+<a href="/recipes">Go back to view recipes</a>
+
+
    <% meals.forEach((meal) => { %>
       <h2> <%= meal.strMeal %> </h2>
       <div class="instructions">
@@ -18,7 +21,7 @@
 
     
     <form method="POST" action="/users/favorites/<%= recipeId %>">
-      <input type="hidden" id="userInput" name="useremail" value="test">
+      <input type="hidden" id="userInput" name="email" value="test">
       <% meals.forEach(meal => { %>
           <input type="hidden" id="recipeName" name="recipe" value="<%=meal.strMeal%>"> 
           <input type="hidden" name="mealId" value="<%=meal.idMeal %>">

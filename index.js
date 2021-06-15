@@ -36,13 +36,16 @@ app.get('/register', (req, res) => {
 })
 
 app.post('/', (req,res) => {
-const passwordHash = bcrypt.hashSync(req.body.password,10)
+const salt= bcrypt.genSaltSync(10)    
+const passwordHash = bcrypt.hashSync(req.body.password, salt)
+console.log(passwordHash)
     db.user.findOne({
         where: {
             email: req.body.email,
             // password: passwordHash
         }
     }) .then(user => {
+        // console.log(user)
         if(user) {
             let currentUser = req.body.email
             res.render('recipes/index', {email:currentUser})
@@ -56,7 +59,8 @@ const passwordHash = bcrypt.hashSync(req.body.password,10)
     
 
 app.post('/register', (req, res) => {
-    const passwordHash = bcrypt.hashSync(req.body.password,10)
+    const salt= bcrypt.genSaltSync(10)    
+    const passwordHash = bcrypt.hashSync(req.body.password, salt)
     db.user.create({
         fName: req.body.fName,
         lName: req.body.lName,
