@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+<nav class="navbar-expand-lg navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Good Eats</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -14,10 +14,8 @@
         <li class="nav-item">
           <form method="GET" action="/users/favorites/<%=email%>">
             <input hidden type="text" name="email" id="email" value="test">
-            <button type="submit">View your favorites</button>
-            <!-- <a class="nav-link" href="/users/favorites"><%= email %></a> -->
+            <button class="navbtn" type="submit">View your favorites</button>
           </form>
-          
         </li>
       </ul>
     </div>
@@ -48,7 +46,7 @@
   
 
 
-<% if (!locals.username) { %>
+<% if (!locals.email) { %>
   <script>
       let currentUser = localStorage.getItem('user')
       document.getElementById('email').value = currentUser
@@ -59,6 +57,7 @@
   <script>
       if(!localStorage.getItem('user')) {
       let user = "<%- email %>"
+      console.log(`this is my new user ${user} `)
       localStorage.setItem('user', user) 
     }
 

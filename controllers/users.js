@@ -2,17 +2,12 @@ let express = require('express')
 let db = require('../models')
 let router = express.Router()
 const axios = require('axios')
+const methodOverride = require('method-override')
+
+router.use(methodOverride('_method'))
 
 
-// async function getImageSrcs (recipeIds) {
-//     const images = []
-//     for (let i = 0; i < recipeIds.length; i++) {
-//         const image = await axios.get(`http://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeIds[i]}`)
-//         const src = image.data.meals[0].strMealThumb
-//         images.push(src)
-//     }
-//     return images 
-// }  
+
 router.get('/favorites/:email', (req, res) => {
     // console.log(req.params, "🚜🚙🚙🚚")
     // console.log(req.params)
@@ -25,33 +20,26 @@ router.get('/favorites/:email', (req, res) => {
     }) .catch (error => {
         console.log(error)
     })
-
 })
-    // const user = await db.user.findOne({
-    //     where: {email: req.params.email},
-    //     include:[db.recipe]
-    // }) 
-    // const recipes = user.dataValues.recipes
-    // const recipeIds= []
-    // recipes.forEach(recipe => {
-    //    recipeIds.push(recipe.dataValues.recipeId) 
-    // })
-    // const imageSrc = await getImageSrcs(recipeIds)
-    // const results = []
-    // for(let i =0; i<recipes.length; i++) {
-    //     const result = {
-    //         recipe: recipes[i],
-    //         image: imageSrc[i]
-    //     }
-    //     results.push(result)
-    // }
-    //     res.render('users/favorites', {results})
+
+router.post('/favorites/email/:email', (req, res) => {
+    db.user.findOne({
+        where: {email: req.params.email},
+        include:[db.recipe]
+    }) .then(foundUser => {
+        res.render('users/favorites.ejs', {foundUser})
+    }) .catch (error => {
+        console.log(error)
+    })
+})
+
 
 
 
 router.post('/favorites/:id', (req, res) => {
-//    console.log(req.body)
-//     console.log(req.params)
+    console.log("🚛🛹🚚🚚🛹🛹🛹")
+   console.log(req.body)
+    console.log(req.params)
     axios.get(`http://www.themealdb.com/api/json/v1/1/lookup.php?i=${req.params.id}`)
     .then(resFav => {
         const meals = resFav.data.meals
@@ -79,10 +67,8 @@ router.post('/favorites/:id', (req, res) => {
 
 router.delete('/favorites/:id', (req, res) => {
     // console.log(req.params, "CONSOLE")
-    // console.log(id, "ID CONSOLE")
-
     const email= req.body.email
-    console.log(req.body, "REQ BODY")
+    // console.log(req.body, "REQ BODY")
     console.log(req.body, "BODY CONSOLE")
     console.log(req.params.id, "PARAMS ID")
     db.user.findOne({
@@ -92,8 +78,8 @@ router.delete('/favorites/:id', (req, res) => {
         db.recipe.destroy({
             where:{recipeId: req.params.id}
         }).then(response => {
-            res.send("got to the delete portion")
-            // res.redirect("")
+            // res.send("got to the delete portion")
+            res.redirect(`/favorites/email/${email}`)
         })
     })
     // res.send("got to the delete portion")
@@ -102,18 +88,6 @@ router.delete('/favorites/:id', (req, res) => {
 })
 
 
-// router.get('/favorites/:email', (req, res) => {
-//     axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s`)
-//     .then(response => {
-//         const meals = response.data.meals
-//         JSON.stringify(meals)
-//         db.user.findOne({
-//             where: {email: req.params.email},
-//             include: [db.recipe]
-//         })
-//         res.render('users/favorites.ejs', {user}) 
-//     })   
-//   })
 
 
 

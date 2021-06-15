@@ -4,6 +4,8 @@
     text-align: center;
 }
 
+/* login page  */
+
 .loginHome{
     width: 100vw;
     height: 100vh;
@@ -64,10 +66,7 @@
     color: #adadad;
     margin-bottom: 10px;
     transform: translateY(-50%);
-  
 }
-
-
 
 .logBtn {
     display: block;
@@ -89,6 +88,19 @@
     margin-top: 60px;
     text-align: center;
     font-size: 15px;
+}
+
+/* recipes home page */
+.nav-item {
+    margin: 0 30px;
+}
+
+.navbtn {
+    border:none;
+    background: none;
+    padding:0;
+    cursor:pointer;
+    margin-bottom: 20px;
 }
 
 
@@ -144,6 +156,7 @@ button {
     color:white;
 }
 
+/* recipe lists */
 .card-space {
     margin-bottom: 25px; 
   }
@@ -154,19 +167,26 @@ button {
     height:20%;
     margin-right: 60px;
 }
+/* instructions page */
 
-.instructions {
+/* .instructions {
     display:flex;
     flex-direction: row;
     justify-content: center;
+} */
+
+.instructionsContainer {
+
 }
 
-li {
-    margin-bottom: 20px;
-    margin-left: 0;
+.itemContainer  {
+    border: 1px solid black;
+    width: 30%;
+
+}
+
    
     
-}
 
 .instrucTitle {
     margin-top: 40px;

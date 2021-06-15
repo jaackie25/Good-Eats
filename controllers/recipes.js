@@ -7,7 +7,8 @@ let router = express.Router()
 
 // page after login will have form to search by recipe and ingredient
 router.get('/', (req, res) => {
-    res.render('recipes/index.ejs')
+    let email = req.query.email
+    res.render('recipes/index.ejs', {email: email})
 })
 
 // post to grab form for recipe name search 
@@ -68,10 +69,10 @@ function loop(arr) {
     })
 
     for (let i = 0; i < ingre.length; i++ ){
-        let ingreMeas= [ingre[i][1], meas[i][1]]
+        let ingreMeas= [meas[i][1], ingre[i][1]]
         finalRecipe.push(ingreMeas)
     }
-
+    // console.log(finalRecipe)
     return finalRecipe
 }
 

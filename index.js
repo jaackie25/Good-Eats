@@ -45,6 +45,7 @@ app.post('/', async (req, res) => {
     const validLogin = await bcrypt.compare(password, user.password)  
     if(validLogin){
         let currentUser = req.body.email
+        console.log(req.body)
         res.render('recipes/index', {email:currentUser})
     } else {
         res.render('home', {errorMessage: 'This Email does not exist. Create an account to login'})
@@ -82,7 +83,7 @@ app.post('/register', async (req, res) =>{
                 email: email,
                 password: hash
             }) 
-      res.redirect('/')   
+      res.redirect('/')    
 })
     
 

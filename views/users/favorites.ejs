@@ -1,15 +1,13 @@
 <h1>Here is a list of all your favorites</h1>
 
-<% console.log(foundUser.get().recipes[0].dataValues.name) %> 
 
-<% console.log(foundUser.email) %>
 
 <% foundUser.get().recipes.forEach((recipe) => { %>
   <p> <%=recipe.name%> </p>
   <a href="/recipes/<%=recipe.recipeId %>">Click here to view details</a>
   
   <form method="POST" action="/users/favorites/<%= recipe.recipeId %>/?_method=DELETE">
-    <input type="hidden" id="email" name="email" value="test">
+    <input type="hidden" id="email" name="email">
     <input type="submit" value="delete">
   </form>
 
@@ -26,7 +24,7 @@
 
 
 
-<% if (!locals.username) { %>
+<% if (!locals.email) { %>
   <script>
       let currentUser = localStorage.getItem('user')
       document.getElementById('email').value = currentUser
@@ -42,5 +40,6 @@
 
     let currentUser = localStorage.getItem('user')
     console.log(`User logged in: ${currentUser}`)
+    document.getElementById('email').value = currentUser
   </script>
 <% } %>

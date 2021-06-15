@@ -1,19 +1,25 @@
 
-<a href="/recipes">Go back to view recipes</a>
+<form method="GET" action="/recipes">
+   <input hidden type="text" id="email" name="email">
+   <button>Go back and search for more recipes</button>
+</form>
 
 
    <% meals.forEach((meal) => { %>
       <h2> <%= meal.strMeal %> </h2>
       <div class="instructions">
          <img class="detailImg" src="<%= meal.strMealThumb %>" alt="">
-         <ol>
+         
+         <div class="itemContainer">
             <% items.forEach((item) => { %>
-               <li class="item"> <%= item %> </li> 
-            <% }) %>
-         </ol>
+               <p> <%= item %>  </p> 
+           <% }) %>
+         </div>
+           
+         
         
       </div>
-    <div>
+    <div class="instructionsContainer">
       <h2 class="instrucTitle">Instructions</h2>
       <%= meal.strInstructions %>
     </div>
@@ -21,21 +27,21 @@
 
     
     <form method="POST" action="/users/favorites/<%= recipeId %>">
-      <input type="hidden" id="userInput" name="email" value="test">
+      <input type="hidden" id="userInput" name="email">
       <% meals.forEach(meal => { %>
           <input type="hidden" id="recipeName" name="recipe" value="<%=meal.strMeal%>"> 
           <input type="hidden" name="mealId" value="<%=meal.idMeal %>">
       <% }) %>
-     
       <input type="submit" value="Add to Favorite" name="Favorite" >
    </form>
 
 
-<% if (!locals.username) { %>
+<% if (!locals.email) { %>
    <script>
        let currentUser = localStorage.getItem('user')
        document.getElementById('userInput').value = currentUser
        console.log(`User logged in: ${currentUser}`)
+       document.getElementById("email").value= currentUser
    </script>
 <% } else { %>
 
@@ -47,5 +53,7 @@
        
        let currentUser = localStorage.getItem('user')
        console.log(`User logged in: ${currentUser}`)
+       document.getElementById("email").value= currentUser
+       document.getElementById('userInput').value = currentUser
    </script>
 <% } %>
