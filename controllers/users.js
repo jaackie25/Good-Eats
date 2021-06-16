@@ -14,33 +14,33 @@ router.get('/favorites/:email', (req, res) => {
         where: {email: req.params.email},
         include:[db.recipe]
     }) .then(foundUser => {
-        // console.log(user, "🛺🚚🚜🛹🚅")
-        res.render('users/favorites.ejs', {foundUser:foundUser, email:email})
-    }) .catch (error => {
-        console.log(error)
-    })
-})
-
-router.get('/favorites/email/:email', (req, res) => {
-    const email = req.params.email
-    db.user.findOne({
-        where: {email: req.params.email},
-        include:[db.recipe]
-    }) .then(foundUser => {
         res.render('users/favorites.ejs', {foundUser:foundUser})
     }) .catch (error => {
         console.log(error)
     })
 })
 
+// router.get('/favorites/email/:email', (req, res) => {
+//     const email = req.params.email
+//     db.user.findOne({
+//         where: {email: req.params.email},
+//         include:[db.recipe]
+//     }) .then(foundUser => {
+//         res.render('users/favorites.ejs', {foundUser:foundUser})
+//     }) .catch (error => {
+//         console.log(error)
+//     })
+// })
+
 
 
 
 router.post('/favorites/:id', (req, res) => {
     console.log("🚛🛹🚚🚚🛹🛹🛹")
-   console.log(req.body)
-    console.log(req.params)
+   console.log(req.body, "REQ BODY")
+    console.log(req.params, "REQ PARAMS")
     const email= req.body.email
+    console.log(email, "EMAIL CHECK")
     axios.get(`http://www.themealdb.com/api/json/v1/1/lookup.php?i=${req.params.id}`)
     .then(resFav => {
         const meals = resFav.data.meals
@@ -57,7 +57,7 @@ router.post('/favorites/:id', (req, res) => {
                 recipeId: req.body.mealId,
             })
         }) 
-        res.render('users/index.ejs', {meals:meals, email:email})
+        res.render('users/index.ejs', {meals})
         
     })
 })
@@ -67,20 +67,15 @@ router.post('/favorites/:id', (req, res) => {
 // DELETE to remove recipe from favorties
 
 router.delete('/favorites/:id', (req, res) => {
-    // console.log(req.params, "CONSOLE")
-    const email= req.body.email
-    // console.log(req.body, "REQ BODY")
-    console.log(req.body, "BODY CONSOLE")
-    console.log(req.params.id, "PARAMS ID")
     db.user.findOne({
         where: {email:req.body.email}
     }).then(user => {
-        console.log(user, "USER CONSOLE")
+        // console.log(user, "USER CONSOLE")
         db.recipe.destroy({
             where:{recipeId: req.params.id}
         }).then(response => {
             // res.send("got to the delete portion")
-            res.redirect(`/users/favorites/email/${email}`)
+            res.redirect('/')
             // res.redirect('/recipes')
         })
     })

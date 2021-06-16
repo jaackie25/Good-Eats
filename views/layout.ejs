@@ -27,7 +27,7 @@
       <script>
         let currentUser = localStorage.getItem('email')
         if(currentUser !== null) {
-            document.getElementById('email').href=("/users/favorites" + currentUser)
+            document.getElementById('email').href=("/users/favorites/" + currentUser)
             document.getElementById('email').innerText=(currentUser + "fav")
             document.getElementById('login').style.display ="none"
         } else {

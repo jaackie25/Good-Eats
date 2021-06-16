@@ -1,6 +1,11 @@
 <h1>Here is a list of all your favorites</h1>
 
+<form  method="GET" action="/">
+  <input hidden type="text" id="email" name="email">
+  <button class="backBtn">Go back and search for more recipes</button>
+</form>
 
+<!-- <h1><%=foundUser.email %> </h1> -->
 
 
   <% foundUser.get().recipes.forEach((recipe) => { %>

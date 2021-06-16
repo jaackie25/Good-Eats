@@ -1,5 +1,5 @@
 
-<form  method="GET" action="/recipes">
+<form  method="GET" action="/">
    <input hidden type="text" id="email" name="email">
    <button class="backBtn">Go back and search for more recipes</button>
 </form>
@@ -20,12 +20,12 @@
      
    <h2 class="instrucTitle">Instructions</h2>
     <div class="instructionsContainer">
-       <p> <%= meal.strInstructions.split(',') %> </p> 
+       <p> <%= meal.strInstructions %> </p> 
     </div>
     <% }) %>
 
     
-    <form  method="POST" action="/users/favorites/<%= recipeId %>">
+    <form id="favoriteForm" method="POST" action="/users/favorites/<%= recipeId %>">
       <input type="hidden" id="userInput" name="email">
       <% meals.forEach(meal => { %>
           <input type="hidden" id="recipeName" name="recipe" value="<%=meal.strMeal%>"> 
@@ -38,26 +38,11 @@
    </form>
 
 
-<% if (!locals.email) { %>
-   <script>
-       let currentUser = localStorage.getItem('user')
-       document.getElementById('userInput').value = currentUser
-       console.log(`User logged in: ${currentUser}`)
-       document.getElementById("email").value= currentUser
-   </script>
-<% } else { %>
-
-   <script>
-       if (!localStorage.getItem('user')) {
-           let user = "<%- email %>"
-           localStorage.setItem('user', user)
-       }
-       
-       let currentUser = localStorage.getItem('user')
-       console.log(`User logged in: ${currentUser}`)
-       document.getElementById('email').value= currentUser
-       document.getElementById('userInput').value = currentUser
-   </script>
-<% } %>
 
 
+<script>
+   if(currentUser == null){
+      document.getElementById('favoriteForm').style.display ='none'
+   }
+   document.getElementById('userInput').value = currentUser
+</script>
