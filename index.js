@@ -49,7 +49,9 @@ app.post('/login', async (req, res) => {
     const validLogin = await bcrypt.compare(password, user.password)  
     if(validLogin){
         res.redirect('/')
-    } 
+    } else {
+        res.redirect('/')
+    }
 })
 
 app.post('/register', async (req, res) =>{
