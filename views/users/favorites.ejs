@@ -1,23 +1,16 @@
-<h1>Here is a list of all your favorites</h1>
+<h1 class="subtitle">Favorites</h1>
 
-<form  method="GET" action="/">
-  <input hidden type="text" id="email" name="email">
-  <button class="backBtn">Go back and search for more recipes</button>
-</form>
-
-<!-- <h1><%=foundUser.email %> </h1> -->
-
-
-  <% foundUser.get().recipes.forEach((recipe) => { %>
-   
-        <a class="favLink" href="/recipes/<%=recipe.recipeId %>"><%=recipe.name%></a>
-    
-    <form class="delete" method="POST" action="/users/favorites/<%= recipe.recipeId %>/?_method=DELETE">
-      <input type="hidden" id="email" name="email">
-      <input type="submit" value="delete">
-    </form>
-  
-  
+    <% foundUser.get().recipes.forEach((recipe) => { %>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item "> <a class="favLink" href="/recipes/<%=recipe.recipeId %>">View <%=recipe.name%></a>
+        <form class="delete" method="POST" action="/users/favorites/<%= recipe.recipeId %>/?_method=DELETE">
+          <input type="hidden" id="email" name="email">
+          <button type="submit" class="delete">
+            <i class="fas fa-trash"></i>
+          </button>
+        </form>
+      </li>
+    </ul>
     <% }) %>
 
 
@@ -26,29 +19,3 @@
 
 
 
-
-
-
-
-
-
-
-<% if (!locals.email) { %>
-  <script>
-      let currentUser = localStorage.getItem('user')
-      document.getElementById('email').value = currentUser
-      console.log(`User logged in: ${currentUser}`)
-  </script>
-<% } else { %>
-
-  <script>
-      if(!localStorage.getItem('user')) {
-      let user = "<%- email %>"
-      localStorage.setItem('user', user) 
-    }
-
-    let currentUser = localStorage.getItem('user')
-    console.log(`User logged in: ${currentUser}`)
-    document.getElementById('email').value = currentUser
-  </script>
-<% } %>

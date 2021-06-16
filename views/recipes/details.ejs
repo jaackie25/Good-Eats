@@ -1,16 +1,11 @@
 
-<form  method="GET" action="/">
-   <input hidden type="text" id="email" name="email">
-   <button class="backBtn">Go back and search for more recipes</button>
-</form>
-
-
    <% meals.forEach((meal) => { %>
-      <h1 class="mealName"> <%= meal.strMeal %> </h1>
+      
       <div class="imageContainer">
          <img class="detailImg" src="<%= meal.strMealThumb %>" alt="">
       </div>  
          <div class="itemContainer">
+            <h1 class="mealName"> <%= meal.strMeal %> </h1>
             <% items.forEach((item) => { %>
                <p> <%= item %>  </p> 
            <% }) %>

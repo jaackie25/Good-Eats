@@ -5,10 +5,7 @@ let router = express.Router()
 
 
 
-// page after login will have form to search by recipe and ingredient
-
-
-// post to grab form for recipe name search 
+// will display the top recipes
 router.get('/results', (req, res) => {
     axios.get(`http://www.themealdb.com/api/json/v1/1/search.php?s=`)
     .then(resName => {
@@ -27,17 +24,17 @@ router.get('/ingredient', (req, res) => {
     .then(resName => {
         const meals = resName.data.meals
         JSON.stringify(meals)
-        res.render('recipes/ingredient.ejs', {meals})
+        res.render('recipes/ingredient.ejs', {meals, ingredient})
     })
 })
 
 
+// route will render recipe instructions
 router.get('/:id', (req, res) => {
     axios.get(`http://www.themealdb.com/api/json/v1/1/lookup.php?i=${req.params.id}`)
     .then(resId => {
        const meals = resId.data.meals
       JSON.stringify(meals)
-
       let items = []
         meals.forEach(meal => {
         items = loop(meal) 
@@ -47,15 +44,12 @@ router.get('/:id', (req, res) => {
 })
 
 
-
+// function to retrieve measurements and food item needed
 function loop(arr) {
-    // console.log(arr)
     let ingre = []
     let meas = []
     let finalRecipe = []
-
     let arrValues = Object.entries(arr)
-
     arrValues.forEach((val) => {
         if(val[0].includes('Ingre') &&  val[1] !== "" && val[1]!= null) {
             ingre.push(val)
@@ -63,12 +57,10 @@ function loop(arr) {
             meas.push(val)
         }
     })
-
     for (let i = 0; i < ingre.length; i++ ){
         let ingreMeas= [meas[i][1], ingre[i][1]]
         finalRecipe.push(ingreMeas)
     }
-    // console.log(finalRecipe)
     return finalRecipe
 }
 

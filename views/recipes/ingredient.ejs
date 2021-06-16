@@ -1,7 +1,4 @@
-<h1>List of meals by ingredient</h1>
-
-
-
+<h1 class="subTitle">Recipes with <%=ingredient %> </h1>
     <div class="container">
       <div class="row">
         <% meals.forEach((meal) => { %>
@@ -10,7 +7,7 @@
                       <img src="<%= meal.strMealThumb %>" class="card-img-top" alt="Picture of food">
                       <div class="card-body">
                         <h5 class="card-title"><%= meal.strMeal %></h5>
-                        <a href="/recipes/<%= meal.idMeal %>" class="btn btn-primary">View Recipe</a>
+                        <a href="/recipes/<%= meal.idMeal %>" class="btn btn-info">View Recipe</a>
                       </div>
                     </div>
                   </div>

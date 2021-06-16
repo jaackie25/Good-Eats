@@ -8,34 +8,42 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@500&family=Rubik:ital,wght@1,300&display=swap" rel="stylesheet">
     <!-- our css here -->
     <link rel="stylesheet" href="/css/styles.css">
     <title>Document</title>
 </head>
 <body>
-    
-  <nav>
-      <a href="/">Home</a>
-      <br>
-      <a id="email" href="">Will change to users email</a>
-      <a id="login" href="/login">Login</a>
-      <br>
-      <a id="logout" href="/" onclick="localStorage.clear()">Log Out</a>
-      <br>
-      
 
-      <script>
-        let currentUser = localStorage.getItem('email')
-        if(currentUser !== null) {
-            document.getElementById('email').href=("/users/favorites/" + currentUser)
-            document.getElementById('email').innerText=(currentUser + "fav")
-            document.getElementById('login').style.display ="none"
-        } else {
-            document.getElementById('email').style.display = "none"
-            document.getElementById('logout').style.display ="none"
-        }
-    </script>
-  </nav>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Good Eats</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="/">Home </a>
+            <a class="nav-item nav-link" id="email" href="">Your Favorites ♥</a>
+            <a class="nav-item nav-link" id="login" href="/login">Login</a>
+            <a class="nav-item nav-link" id="logout" href="/" onclick="localStorage.clear()">Logout</a>
+          </div>
+        </div>
+
+        <script>
+            let currentUser = localStorage.getItem('email')
+            if(currentUser) {
+                document.getElementById('email').href=(`/users/favorites/${currentUser}`)
+                document.getElementById('login').style.display ="none"
+            } else {
+                document.getElementById('email').style.display = "none"
+                document.getElementById('logout').style.display ="none"
+            }
+        </script>
+
+      </nav>
+    
 
      <%- body %>
 </body>

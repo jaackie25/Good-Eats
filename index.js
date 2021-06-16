@@ -49,7 +49,6 @@ app.post('/login', async (req, res) => {
     const validLogin = await bcrypt.compare(password, user.password)  
     if(validLogin){
         res.redirect('/')
-        // res.send("got to post")
     } 
 })
 
@@ -75,4 +74,3 @@ app.listen(PORT, () => {
 })
 
 
-// app.get('/checking/branch')
