@@ -50,7 +50,7 @@ app.post('/login', async (req, res) => {
     if(validLogin){
         res.redirect('/')
     } else {
-        res.redirect('/')
+        res.redirect('/login')
     }
 })
 
