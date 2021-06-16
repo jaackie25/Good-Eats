@@ -13,7 +13,7 @@
         </li>
         <li class="nav-item">
           <form method="GET" action="/users/favorites/<%=email%>">
-            <input hidden type="text" name="email" id="email" value="test">
+            <input hidden type="text" name="email" id="email">
             <button class="navbtn" type="submit">View your favorites</button>
           </form>
         </li>
@@ -53,14 +53,12 @@
       console.log(`User logged in: ${currentUser}`)
   </script>
 <% } else { %>
-
   <script>
       if(!localStorage.getItem('user')) {
       let user = "<%- email %>"
       console.log(`this is my new user ${user} `)
       localStorage.setItem('user', user) 
     }
-
     let currentUser = localStorage.getItem('user')
     console.log(`User logged in: ${currentUser}`)
   </script>

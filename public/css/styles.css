@@ -90,6 +90,13 @@
     font-size: 15px;
 }
 
+/* logout */
+#logout {
+    position: absolute;
+    left: 95%;
+    top: 0.5%;
+}
+
 /* recipes home page */
 .nav-item {
     margin: 0 30px;
@@ -161,12 +168,7 @@ button {
     margin-bottom: 25px; 
   }
 
-.detailImg {
-    display: inline-block;
-    width:20%;
-    height:20%;
-    margin-right: 60px;
-}
+
 /* instructions page */
 
 /* .instructions {
@@ -175,20 +177,92 @@ button {
     justify-content: center;
 } */
 
-.instructionsContainer {
+.imageContainer {
+    position: absolute;
+    left: 10%;
+    top: 6%;
 
+}
+
+.detailImg {
+    width: 540px;
+    
 }
 
 .itemContainer  {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 30%;
-
+    position: absolute;
+    left: 57%;
+    top: 11%;
 }
 
-   
+.itemContainer p {
+    padding:0;
+    margin:3px;
+    font-size: 15px;
     
-
-.instrucTitle {
-    margin-top: 40px;
 }
 
+.mealName {
+    position: absolute;
+    left: 57%;
+    top: 5%;
+}
+   
+.instrucTitle {
+    position: absolute;
+    left:45%;
+    top: 68%
+}
+
+.instructionsContainer {
+    /* border: 1px solid black; */
+    position: absolute;
+    top: 74%;
+    padding: 0 30px;
+}
+
+.backBtn {
+    position: absolute;
+    left: 0.5px;
+    top: 0.5px;
+    background: none;
+    color:black;
+    margin: 0 10px;
+    padding:3px;
+}
+
+hr {
+  margin: 620px 15px 0 15px ;
+  border: 0;
+  /* padding: 10px; */
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0));
+}
+
+.like {
+    background: none;
+    position: absolute;
+    left: 10%;
+    top: 4%;
+    border: none;
+    outline:none;
+}
+
+.fas {
+    color:red;
+    font-size: 20px;
+}
+
+/* fav list */
+.favList {
+    border: 1px solid black;
+    position: absolute;
+    left: 2%;
+    
+}
+
+.delete {
+    display: inline-block;
+}

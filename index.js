@@ -8,6 +8,7 @@ const rowdy = require('rowdy-logger')
 const bcrypt = require('bcrypt')
 
 
+
 // config app
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -24,7 +25,6 @@ rowdy.begin(app)
 // attaching controllers
 app.use('/recipes', require('./controllers/recipes'))
 app.use('/users', require('./controllers/users'))
-
 
 
 app.get('/', (req, res) => {
@@ -51,27 +51,6 @@ app.post('/', async (req, res) => {
     }
 })
 
-// app.post('/', (req,res) => {
-// const salt= bcrypt.genSaltSync(10)    
-// const passwordHash = bcrypt.hashSync(req.body.password, salt)
-// console.log(passwordHash)
-//     db.user.findOne({
-//         where: {
-//             email: req.body.email,
-//             password: passwordHash
-//         }
-//     }) .then(user => {
-//         if(user) {
-//             let currentUser = req.body.email
-//             res.render('recipes/index', {email:currentUser})
-//         } else {
-//             res.render('home', {errorMessage: 'This Email does not exist. Create an account to login'})
-//         }
-//     }) .catch(error => {
-//         console.log(error)
-//     })
-// })
-
 app.post('/register', async (req, res) =>{
     const password = req.body.password
     const email= req.body.email
@@ -85,23 +64,6 @@ app.post('/register', async (req, res) =>{
       res.redirect('/')    
 })
     
-
-// app.post('/register', (req, res) => {
-//     const salt= bcrypt.genSaltSync(10)    
-//     const passwordHash = bcrypt.hashSync(req.body.password, salt)
-//     db.user.create({
-//         fName: req.body.fName,
-//         lName: req.body.lName,
-//         email: req.body.email,
-//         password: passwordHash
-//     }) .then(user => {
-//         console.log(user.get())
-//         res.redirect('/')
-//     }) .catch(error => {
-//         res.render('register', {errorMessage: 'This email already exists. Try again with a different email'})
-//     }) 
-// })
-
 app.get('/logout', (req, res) => {
     res.render('home', {logout: true})
 })
@@ -109,3 +71,6 @@ app.get('/logout', (req, res) => {
 app.listen(PORT, () => {
     console.log(`you are listening on port ${PORT} 👨‍🍳`)
 })
+
+
+app.get('/checking/branch')

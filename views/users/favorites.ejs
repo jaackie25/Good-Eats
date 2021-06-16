@@ -2,16 +2,20 @@
 
 
 
-<% foundUser.get().recipes.forEach((recipe) => { %>
-  <p> <%=recipe.name%> </p>
-  <a href="/recipes/<%=recipe.recipeId %>">Click here to view details</a>
-  
-  <form method="POST" action="/users/favorites/<%= recipe.recipeId %>/?_method=DELETE">
-    <input type="hidden" id="email" name="email">
-    <input type="submit" value="delete">
-  </form>
 
-  <% }) %>
+  <% foundUser.get().recipes.forEach((recipe) => { %>
+   
+        <a class="favLink" href="/recipes/<%=recipe.recipeId %>"><%=recipe.name%></a>
+    
+    <form class="delete" method="POST" action="/users/favorites/<%= recipe.recipeId %>/?_method=DELETE">
+      <input type="hidden" id="email" name="email">
+      <input type="submit" value="delete">
+    </form>
+  
+  
+    <% }) %>
+
+
 
 
 

@@ -9,41 +9,29 @@ router.use(methodOverride('_method'))
 
 
 router.get('/favorites/:email', (req, res) => {
-    // console.log(req.params, "🚜🚙🚙🚚")
-    // console.log(req.params)
+    const email = req.params.email
     db.user.findOne({
         where: {email: req.params.email},
         include:[db.recipe]
     }) .then(foundUser => {
         // console.log(user, "🛺🚚🚜🛹🚅")
-        res.render('users/favorites.ejs', {foundUser})
+        res.render('users/favorites.ejs', {foundUser:foundUser, email:email})
     }) .catch (error => {
         console.log(error)
     })
 })
 
 router.get('/favorites/email/:email', (req, res) => {
+    const email = req.params.email
     db.user.findOne({
         where: {email: req.params.email},
         include:[db.recipe]
     }) .then(foundUser => {
-        res.render('users/favorites.ejs', {foundUser})
+        res.render('users/favorites.ejs', {foundUser:foundUser})
     }) .catch (error => {
         console.log(error)
     })
 })
-
-
-// router.post('/favorites/email/:email', (req, res) => {
-//     db.user.findOne({
-//         where: {email: req.params.email},
-//         include:[db.recipe]
-//     }) .then(foundUser => {
-//         res.render('users/favorites.ejs', {foundUser})
-//     }) .catch (error => {
-//         console.log(error)
-//     })
-// })
 
 
 
@@ -52,6 +40,7 @@ router.post('/favorites/:id', (req, res) => {
     console.log("🚛🛹🚚🚚🛹🛹🛹")
    console.log(req.body)
     console.log(req.params)
+    const email= req.body.email
     axios.get(`http://www.themealdb.com/api/json/v1/1/lookup.php?i=${req.params.id}`)
     .then(resFav => {
         const meals = resFav.data.meals
@@ -61,15 +50,15 @@ router.post('/favorites/:id', (req, res) => {
                 email: req.body.email
             }
         }).then (user => {
-        //    console.log(user)
+           console.log(user, "USER CONSOLE CHECK")
             db.recipe.create({
                 name: req.body.recipe,
                 userId: user.dataValues.id,
                 recipeId: req.body.mealId,
             })
         }) 
-        res.render('users/index.ejs', {meals})
-        // res.send("testing again")
+        res.render('users/index.ejs', {meals:meals, email:email})
+        
     })
 })
 
@@ -92,6 +81,7 @@ router.delete('/favorites/:id', (req, res) => {
         }).then(response => {
             // res.send("got to the delete portion")
             res.redirect(`/users/favorites/email/${email}`)
+            // res.redirect('/recipes')
         })
     })
     // res.send("got to the delete portion")

@@ -1,5 +1,11 @@
 <h1>You added a favorite</h1>
-  
+
+
+<form  method="GET" action="/recipes">
+  <input hidden type="text" id="email" name="email">
+  <button class="backBtn">Go back and search for more recipes</button>
+</form>
+
  <div class="container">
     <div class="row justify-content-center">
       <% meals.forEach((meal) => { %>
@@ -15,3 +21,30 @@
       <% }) %>
     </div>
   </div>
+
+
+
+
+
+  <% if (!locals.email) { %>
+    <script>
+        let currentUser = localStorage.getItem('user')
+        document.getElementById('userInput').value = currentUser
+        console.log(`User logged in: ${currentUser}`)
+        document.getElementById("email").value= currentUser
+    </script>
+ <% } else { %>
+ 
+    <script>
+        if (!localStorage.getItem('user')) {
+            let user = "<%- email %>"
+            localStorage.setItem('user', user)
+        }
+        
+        let currentUser = localStorage.getItem('user')
+        console.log(`User logged in: ${currentUser}`)
+        document.getElementById('email').value= currentUser
+        document.getElementById('userInput').value = currentUser
+    </script>
+ <% } %>
+ 

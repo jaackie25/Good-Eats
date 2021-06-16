@@ -1,38 +1,40 @@
 
-<form method="GET" action="/recipes">
+<form  method="GET" action="/recipes">
    <input hidden type="text" id="email" name="email">
-   <button>Go back and search for more recipes</button>
+   <button class="backBtn">Go back and search for more recipes</button>
 </form>
 
 
    <% meals.forEach((meal) => { %>
-      <h2> <%= meal.strMeal %> </h2>
-      <div class="instructions">
+      <h1 class="mealName"> <%= meal.strMeal %> </h1>
+      <div class="imageContainer">
          <img class="detailImg" src="<%= meal.strMealThumb %>" alt="">
-         
+      </div>  
          <div class="itemContainer">
             <% items.forEach((item) => { %>
                <p> <%= item %>  </p> 
            <% }) %>
          </div>
-           
-         
-        
-      </div>
+    
+         <hr>
+     
+   <h2 class="instrucTitle">Instructions</h2>
     <div class="instructionsContainer">
-      <h2 class="instrucTitle">Instructions</h2>
-      <%= meal.strInstructions %>
+       <p> <%= meal.strInstructions.split(',') %> </p> 
     </div>
     <% }) %>
 
     
-    <form method="POST" action="/users/favorites/<%= recipeId %>">
+    <form  method="POST" action="/users/favorites/<%= recipeId %>">
       <input type="hidden" id="userInput" name="email">
       <% meals.forEach(meal => { %>
           <input type="hidden" id="recipeName" name="recipe" value="<%=meal.strMeal%>"> 
           <input type="hidden" name="mealId" value="<%=meal.idMeal %>">
       <% }) %>
-      <input type="submit" value="Add to Favorite" name="Favorite" >
+      <button class="like" type="submit" name="Favorite">
+         <i class="fas fa-heart"></i>
+      </button>
+   
    </form>
 
 
@@ -53,7 +55,9 @@
        
        let currentUser = localStorage.getItem('user')
        console.log(`User logged in: ${currentUser}`)
-       document.getElementById("email").value= currentUser
+       document.getElementById('email').value= currentUser
        document.getElementById('userInput').value = currentUser
    </script>
 <% } %>
+
+
