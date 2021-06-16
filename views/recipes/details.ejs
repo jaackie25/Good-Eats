@@ -1,6 +1,5 @@
 
    <% meals.forEach((meal) => { %>
-      
       <div class="imageContainer">
          <img class="detailImg" src="<%= meal.strMealThumb %>" alt="">
       </div>  
@@ -8,9 +7,9 @@
             <h1 class="mealName"> <%= meal.strMeal %> </h1>
             <% items.forEach((item) => { %>
                <p> <%= item %>  </p> 
-           <% }) %>
+            <% }) %>
          </div>
-    
+         
          <hr>
      
    <h2 class="instrucTitle">Instructions</h2>
@@ -29,7 +28,6 @@
       <button class="like" type="submit" name="Favorite">
          <i class="fas fa-heart"></i>
       </button>
-   
    </form>
 
 

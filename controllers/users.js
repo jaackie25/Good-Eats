@@ -7,7 +7,6 @@ const methodOverride = require('method-override')
 router.use(methodOverride('_method'))
 
 
-
 router.get('/favorites/:email', (req, res) => {
     const email = req.params.email
     db.user.findOne({
@@ -45,7 +44,7 @@ router.post('/favorites/:id', (req, res) => {
 
 
 
-// DELETE to remove recipe from favorties
+// DELETE to remove recipe from favorites
 
 router.delete('/favorites/:id', (req, res) => {
     db.user.findOne({

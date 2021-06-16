@@ -55,12 +55,12 @@ function loop(arr) {
             ingre.push(val)
         } else if(val[0].includes('Meas') && val[1] !== "" && val[1]!= null) {
             meas.push(val)
-        }
-    })
+            }
+        })
     for (let i = 0; i < ingre.length; i++ ){
         let ingreMeas= [meas[i][1], ingre[i][1]]
         finalRecipe.push(ingreMeas)
-    }
+        }
     return finalRecipe
 }
 

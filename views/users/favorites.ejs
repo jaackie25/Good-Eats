@@ -1,6 +1,6 @@
 <h1 class="subtitle">Favorites</h1>
 
-    <% foundUser.get().recipes.forEach((recipe) => { %>
+  <% foundUser.get().recipes.forEach((recipe) => { %>
     <ul class="list-group list-group-flush">
       <li class="list-group-item "> <a class="favLink" href="/recipes/<%=recipe.recipeId %>">View <%=recipe.name%></a>
         <form class="delete" method="POST" action="/users/favorites/<%= recipe.recipeId %>/?_method=DELETE">
@@ -11,7 +11,7 @@
         </form>
       </li>
     </ul>
-    <% }) %>
+  <% }) %>
 
 
 
