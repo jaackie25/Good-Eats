@@ -8,7 +8,6 @@ router.use(methodOverride('_method'))
 
 
 router.get('/favorites/:email', (req, res) => {
-    const email = req.params.email
     db.user.findOne({
         where: {email: req.params.email},
         include:[db.recipe]
@@ -30,7 +29,6 @@ router.post('/favorites/:id', (req, res) => {
                 email: req.body.email
             }
         }).then (user => {
-           console.log(user, "USER CONSOLE CHECK")
             db.recipe.create({
                 name: req.body.recipe,
                 userId: user.dataValues.id,
