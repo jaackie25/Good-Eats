@@ -3,7 +3,7 @@
 <div class="loginHome">
     <h1>Welcome to Good Eats, home of the Good Eats</h1>
 
-    <form class="login-form" action="/" method="POST">
+    <form class="login-form" action="/login" method="POST" onsubmit="localStorage.setItem('email', email.value)">
         <h1>Login</h1>
         <div class="txtb">
             <input type="text" placeholder="Email" name="email" required>

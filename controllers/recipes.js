@@ -6,14 +6,10 @@ let router = express.Router()
 
 
 // page after login will have form to search by recipe and ingredient
-router.get('/', (req, res) => {
-    let email = req.query.email
-    res.render('recipes/index.ejs', {email: email})
-})
+
 
 // post to grab form for recipe name search 
 router.get('/results', (req, res) => {
-    // let query = req.query.name
     axios.get(`http://www.themealdb.com/api/json/v1/1/search.php?s=`)
     .then(resName => {
         const meals = resName.data.meals

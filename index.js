@@ -27,8 +27,13 @@ app.use('/recipes', require('./controllers/recipes'))
 app.use('/users', require('./controllers/users'))
 
 
-app.get('/', (req, res) => {
-    res.render('home')
+
+app.get('/',(req, res) => {
+    res.render('root')
+})
+
+app.get('/login', (req, res) => {
+    res.render('login')
 })
 
 app.get('/register', (req, res) => {
@@ -36,19 +41,16 @@ app.get('/register', (req, res) => {
 })
 
 
-app.post('/', async (req, res) => {
-    const email= req.body.email
+app.post('/login', async (req, res) => {
     const password= req.body.password
     const user = await  db.user.findOne({
-        where: {email: email}
+        where: {email: req.body.email}
          })
     const validLogin = await bcrypt.compare(password, user.password)  
     if(validLogin){
-        let currentUser = req.body.email
-        res.render('recipes/index', {email:currentUser})
-    } else {
-        res.render('home', {errorMessage: 'This Email does not exist. Create an account to login'})
-    }
+        res.redirect('/')
+        // res.send("got to post")
+    } 
 })
 
 app.post('/register', async (req, res) =>{
@@ -73,4 +75,4 @@ app.listen(PORT, () => {
 })
 
 
-app.get('/checking/branch')
+// app.get('/checking/branch')
